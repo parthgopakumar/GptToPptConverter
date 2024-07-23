@@ -23,7 +23,7 @@ def main():
     prs = Presentation()
     
     # Create title slide
-    slide_layout = prs.slide_layouts[0]  # Title slide layout
+    slide_layout = prs.slide_layouts[0]  
     slide = prs.slides.add_slide(slide_layout)
     title_shape = slide.shapes.title
     title_shape.text = presentation_title
