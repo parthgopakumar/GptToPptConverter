@@ -19,7 +19,7 @@ def main():
     # Get user input
     presentation_title = input("Enter your presentation title: ")
     
-    # Create a new presentation
+    # creates a new presentation
     prs = Presentation()
     
     # Create title slide
@@ -57,3 +57,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+# How to Run
+# pip3 install python-pptx
+# run code and enter info
