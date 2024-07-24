@@ -1,79 +1,59 @@
-import os
+#imports required 
 from pptx import Presentation
-import openai
+from pptx.util import Pt
+import re
 
-# Set your OpenAI API key
-openai.api_key = 'api-open-key'
+def create_presentation(slides_content, output_file):
+    # Regular expression to split the slides
+    slides = re.split(r'\n(?=Slide \d+:)', slides_content.strip())
 
-def create_slide(prs, title, content):
-    slide_layout = prs.slide_layouts[1]  # Slide layout with title and content
-    slide = prs.slides.add_slide(slide_layout)
-    
-    # Set slide title
-    title_shape = slide.shapes.title
-    title_shape.text = title
-    
-    # Set slide content
-    content_shape = slide.placeholders[1]
-    tf = content_shape.text_frame
-    tf.text = content
-
-def generate_content(prompt):
-    # Generate text content using GPT-3.5-turbo or GPT-4
-    response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",  # You can change to "gpt-4" if you have access
-        messages=[
-            {"role": "system", "content": "You are a helpful assistant."},
-            {"role": "user", "content": prompt}
-        ],
-        max_tokens=200,
-        n=1,
-        temperature=0.7,
-    )
-    generated_text = response.choices[0].message['content'].strip()
-    return generated_text
-
-def main():
-    print("Initializing AI model... This may take a moment.")
-    
-    # Get presentation topic from user
-    presentation_topic = input("Enter your presentation topic: ")
-    
-    # Generate presentation title
-    title_prompt = f"Create a title for a presentation about {presentation_topic}:"
-    presentation_title = generate_content(title_prompt).split('\n')[0]
-    
-    # Create a new presentation
+    # Create a presentation object
     prs = Presentation()
-    
-    # Add title slide
-    slide_layout = prs.slide_layouts[0]
-    slide = prs.slides.add_slide(slide_layout)
-    title_shape = slide.shapes.title
-    title_shape.text = presentation_title
-    
-    # Generate and add content slides
-    slides = []
-    for i in range(3):  # Create 3 content slides
-        slide_prompt = f"Create a slide title and content for a presentation about {presentation_topic}. Slide {i+1}:"
-        slide_content = generate_content(slide_prompt)
+
+    for slide_text in slides:
+        lines = slide_text.split('\n')
+        # First line is the title
+        slide_title = lines[0].split(': ')[1].strip()
+        slide = prs.slides.add_slide(prs.slide_layouts[1])  # Adding a title and content slide
+        title = slide.shapes.title
+        title.text = slide_title
         
-        lines = slide_content.split('\n')
-        slide_title = lines[0].strip()
-        slide_content = '\n'.join(lines[1:]).strip()
-        
-        slides.append((slide_title, slide_content))
-    
-    for title, content in slides:
-        create_slide(prs, title, content)
-    
+        # Rest of the lines are content, add them to the content placeholder
+        content = slide.placeholders[1].text_frame
+        content.text = ""  # Initialize text frame
+
+        for line in lines[1:]:
+            if line.strip():  # Avoid empty lines
+                # Add a new paragraph for each line of content
+                p = content.add_paragraph()
+                p.text = line.strip()
+                p.space_after = Pt(14)  # Add some space after each paragraph
+
     # Save the presentation
-    prs.save('generated_presentation.pptx')
-    print(f"Presentation saved as 'generated_presentation.pptx' in {os.getcwd()}")
+    prs.save(output_file)
 
-if __name__ == "__main__":
-    main()
+# Function to get user input
+def get_slides_input():
+    print("Use the format 'Slide n: Title' for slide titles.")
+    print("Enter the slide content line by line. Enter an empty line when you're done with a slide.")
+    print("Type 'end' on a new line when you are done entering all slides. (This should be at the very end) \n")
 
-# To Run
-# install pip install python-pptx openai
+    slides_content = ""
+    while True:
+        line = input()
+        if line.strip().upper() == "end":
+            break
+        slides_content += line + "\n"
 
+    return slides_content
+
+# Get user input for slides
+slides_content = get_slides_input()
+
+# Specify the output file (check files/folders for this specific file)
+output_file = 'AI_Introduction_Presentation.pptx'
+
+# Create the PowerPoint presentation
+create_presentation(slides_content, output_file)
+
+print(f"Presentation saved as '{output_file}'")
