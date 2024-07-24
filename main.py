@@ -2,12 +2,21 @@ from pptx import Presentation
 from pptx.util import Pt
 import re
 
-def create_presentation(input_file, output_file):
+def new_presentation(input_file, output_file):
     # Read the contents of the input file
     with open(input_file, 'r') as file:
         slides_content = file.read()
     
-    # Regular expression to split the slides 
+    # Regular Expression Explanation
+    
+    # Regular expression to split the slides
+    # slides_content.strip() removes trailing whitepsace from the slides_content string, so that it does not interfere with splitting
+    # re.split() splits the string wherever the regular expression matches with a pattern
+    # r represents raw string literal
+    # \n is newline character and this is where splitting occurs
+    # The info in the paranthesis is the lookahead assertion, which is match the input with the given pattern
+    # In this context, we define the split where it is after string with Slide and d+ or digit, and it will confirm if this is true before spliting
+    
     slides = re.split(r'\n(?=Slide \d+:)', slides_content.strip())
 
     # Create a presentation object
@@ -41,6 +50,6 @@ input_file = 'slides_input.txt'  # Input text file
 output_file = 'output.pptx' # Output PPT file 
 
 # Create the PowerPoint presentation
-create_presentation(input_file, output_file)
+new_presentation(input_file, output_file)
 
 print(f"Presentation saved as '{output_file}'")
