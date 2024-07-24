@@ -1,0 +1,31 @@
+# THIS IS A TEXT FILE USED AS INPUT 
+# USE CHATGPT TO CREATE A PRESENTATION OUTLINE AND THEN INPUT THE TEXT INTO THIS FILE
+
+# Example 
+
+Slide 1: Introduction to World War I
+World War I, also known as the Great War, was a global conflict that lasted from 1914 to 1918.
+It involved many of the world's nations and was centered in Europe.
+The war was triggered by the assassination of Archduke Franz Ferdinand of Austria.
+
+Slide 2: Causes of World War I
+The war was caused by a complex set of factors including:
+- Nationalism: Intense national pride and competition among European nations.
+- Imperialism: Competition for colonies and resources.
+- Militarism: The buildup of military forces and arms race.
+- Alliances: Entangling alliances between major powers, including the Triple Entente and the Triple Alliance.
+- Assassination of Archduke Franz Ferdinand: The immediate spark that ignited the conflict.
+
+Slide 3: Major Battles and Fronts
+Key battles and fronts of World War I included:
+- Western Front: Characterized by trench warfare and major battles such as the Battle of the Somme and the Battle of Verdun.
+- Eastern Front: Involvement of Germany, Austria-Hungary, and Russia with major battles like the Battle of Tannenberg.
+- Other Fronts: Fighting in the Middle East, Africa, and Asia.
+- Notable battles: The Battle of the Marne, the Battle of Gallipoli, and the Battle of the Argonne Forest.
+
+Slide 4: Consequences and Legacy of World War I
+The aftermath of World War I had profound effects on the world:
+- Treaty of Versailles: The peace treaty that ended the war, imposing heavy reparations and territorial losses on Germany.
+- Political Changes: The collapse of empires (Austro-Hungarian, Ottoman, Russian, and German) and the rise of new nations.
+- Social and Economic Impact: Significant loss of life, economic hardship, and the shaping of modern geopolitics.
+- Prelude to World War II: The unresolved issues and consequences of World War I set the stage for World War II.
