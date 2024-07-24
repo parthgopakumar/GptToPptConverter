@@ -1,4 +1,4 @@
-mport os
+import os
 from pptx import Presentation
 import openai
 
